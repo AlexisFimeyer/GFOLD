@@ -28,6 +28,11 @@ def visualize_3d_solution(solution_dict, obstacle_center=None, obstacle_radius=N
         z_obs = oz + obstacle_radius * np.outer(np.ones(np.size(u)), np.cos(v))
         ax.plot_surface(x_obs, y_obs, z_obs, alpha=0.2, color='red')
 
+    # Add fuel usage to title if available
+    if "T_mag" in solution_dict:
+        fuel_usage = np.sum(solution_dict["T_mag"])
+        plt.title(f"3D Trajectory (Total Fuel Usage: {fuel_usage:.1f} N⋅s)")
+
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
     ax.set_zlabel("Z")
